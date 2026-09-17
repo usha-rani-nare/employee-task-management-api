@@ -1,0 +1,68 @@
+{
+  "info": {
+    "name": "Employee Task Management API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:8080" }
+  ],
+  "item": [
+    {
+      "name": "Create Employee",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Priya Sharma\",\n  \"email\": \"priya@example.com\",\n  \"department\": \"Engineering\"\n}"
+        },
+        "url": "{{base_url}}/api/employees"
+      }
+    },
+    {
+      "name": "Get All Employees",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/employees"
+      }
+    },
+    {
+      "name": "Create Task",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Set up CI/CD pipeline\",\n  \"description\": \"Add GitHub Actions workflow for build and deploy\"\n}"
+        },
+        "url": "{{base_url}}/api/tasks"
+      }
+    },
+    {
+      "name": "Assign Task to Employee",
+      "request": {
+        "method": "PUT",
+        "url": "{{base_url}}/api/tasks/1/assign/1"
+      }
+    },
+    {
+      "name": "Update Task Status",
+      "request": {
+        "method": "PATCH",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"IN_PROGRESS\"\n}"
+        },
+        "url": "{{base_url}}/api/tasks/1/status"
+      }
+    },
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/actuator/health"
+      }
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: employee-api
+  labels:
+    app: employee-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: employee-api
+  template:
+    metadata:
+      labels:
+        app: employee-api
+    spec:
+      containers:
+        - name: employee-api
+          image: <acr-name>.azurecr.io/employee-task-manager:latest
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: employee-api-config
+            - secretRef:
+                name: employee-api-secret
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "256Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+          # readiness = "is it ok to send this pod traffic"
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 20
+            periodSeconds: 10
+          # liveness = "should k8s restart this pod"
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 40
+            periodSeconds: 15
