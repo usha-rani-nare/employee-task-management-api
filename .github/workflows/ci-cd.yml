@@ -94,4 +94,9 @@ jobs:
           kubectl apply -f k8s/hpa.yaml
 
       # swaps in the image we just pushed instead of relying on
-      # whatever
+      # whatever :latest happens to resolve to
+      - name: Update deployment image
+        run: kubectl set image deployment/employee-api employee-api=${{ secrets.ACR_LOGIN_SERVER }}/employee-task-manager:${{ github.sha }}
+
+      - name: Wait for rollout
+        run: kubectl rollout status deployment/employee-api --timeout=120s
