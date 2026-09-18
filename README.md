@@ -1,10 +1,14 @@
 # Employee Task Management API
 
-A simple Spring Boot REST API for managing employees and their tasks, built mainly as a way
-to actually practice the DevOps/SRE side of things instead of just adding another CRUD app to
-my resume. I already had the Java/Spring Boot/MySQL part down from previous projects, so most
-of the effort here went into the layer around the application - Docker, CI/CD, Kubernetes, and
-monitoring.
+I built this while preparing for an SRE/DevOps interview at Deloitte. All my earlier
+projects were just "here's an API I built" — nothing about how it actually gets deployed
+or monitored. For an SRE role that's a real gap, so this project exists specifically to
+fix it: same Java/Spring Boot/MySQL backend I already knew, but with a real CI/CD pipeline,
+Docker, Kubernetes, and monitoring wrapped around it.
+
+Everything in here is something I actually configured, ran, and debugged myself — including
+fixing a real MySQL connection timing issue and a Git merge conflict while setting this up.
+It's not production infrastructure, but every piece is real, not copy-pasted from a tutorial.
 
 ## Why this project exists
 
