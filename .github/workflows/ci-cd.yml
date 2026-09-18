@@ -34,9 +34,10 @@ jobs:
           name: app-jar
           path: target/employee-task-manager.jar
 
-  docker-build-push:
-    needs: build-and-test
-    runs-on: ubuntu-latest
+ docker-build-push:
+      needs: build-and-test
+      runs-on: ubuntu-latest
+      if: false   # skipped: requires a live Azure Container Registry, not set up yet
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
