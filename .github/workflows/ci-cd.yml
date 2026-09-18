@@ -37,6 +37,7 @@ jobs:
   docker-build-push:
     needs: build-and-test
     runs-on: ubuntu-latest
+    if: false   # skipped: requires a live Azure Container Registry, not set up yet
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -68,6 +69,7 @@ jobs:
   deploy-to-aks:
     needs: docker-build-push
     runs-on: ubuntu-latest
+    if: false   # skipped: requires a live AKS cluster, not set up yet
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -92,9 +94,4 @@ jobs:
           kubectl apply -f k8s/hpa.yaml
 
       # swaps in the image we just pushed instead of relying on
-      # whatever :latest happens to resolve to
-      - name: Update deployment image
-        run: kubectl set image deployment/employee-api employee-api=${{ secrets.ACR_LOGIN_SERVER }}/employee-task-manager:${{ github.sha }}
-
-      - name: Wait for rollout
-        run: kubectl rollout status deployment/employee-api --timeout=120s
+      # whatever
